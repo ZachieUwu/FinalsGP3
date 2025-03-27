@@ -798,13 +798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a4b66abff267c428208de46e9ccbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxedItems: 0000000000
-  slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  inventory: []
+  inventoryUI: {fileID: 0}
 --- !u!1 &437568655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,7 +2022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6671071206888535106, guid: 16d3136f8c4e1d1459cd4f7c16222b98, type: 3}
       propertyPath: levelName
-      value: Level 2
+      value: Level 3
       objectReference: {fileID: 0}
     - target: {fileID: 6671071206888535106, guid: 16d3136f8c4e1d1459cd4f7c16222b98, type: 3}
       propertyPath: levelname

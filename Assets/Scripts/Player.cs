@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 10f;
+    private float speed = 16f;
+    private float jumpingPower = 40f;
     private bool isFacingRight = true;
     private IInteractable interactableObject;
+    public Animator animator;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -16,12 +18,25 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            animator.SetBool("isJump", true);
         }
 
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        if (!IsGrounded())
+        {
+            animator.SetBool("isJump", true);
+        }
+
+        if (rb.linearVelocity.y < 1f && IsGrounded())
+        {
+            animator.SetBool("isJump", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }

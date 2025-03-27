@@ -10,12 +10,12 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            PickUpItem();
+
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            ToggleInventory();
+
         }
     }
 }
