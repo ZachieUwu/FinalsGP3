@@ -3,19 +3,15 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> inventory = new List<string>();
-    public GameObject inventoryUI;
+    public List<GameObject> collectedItems = new List<GameObject>();
+    public int maxItems;
 
-    private void Update()
+    public void SetInteractableItem(GameObject item)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (item != null && collectedItems.Count < maxItems)
         {
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-
+            collectedItems.Add(item);
+            item.SetActive(false);
         }
     }
 }

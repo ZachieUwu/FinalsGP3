@@ -8,15 +8,20 @@ public class Player1 : MonoBehaviour
     private float jumpingPower = 10f;
     private bool isFacingRight = true;
     private IInteractable interactableObject;
+    private Inventory saveItem;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    void Start()
+    {
+        saveItem = GetComponent<Inventory>();
+    }
+
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
@@ -48,7 +53,7 @@ public class Player1 : MonoBehaviour
 
     private void Flip()
     {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f))
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
@@ -63,6 +68,10 @@ public class Player1 : MonoBehaviour
         {
             interactableObject = interactable;
         }
+        else if (other.CompareTag("Item"))
+        {
+            CollectItem(other.gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -70,6 +79,15 @@ public class Player1 : MonoBehaviour
         if (other.TryGetComponent<IInteractable>(out var interactable) && interactableObject == interactable)
         {
             interactableObject = null;
+        }
+    }
+
+    private void CollectItem(GameObject item)
+    {
+        if (saveItem != null && saveItem.collectedItems.Count < saveItem.maxItems)
+        {
+            saveItem.SetInteractableItem(item);
+            item.SetActive(false);
         }
     }
 }

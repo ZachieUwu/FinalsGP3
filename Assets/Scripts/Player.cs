@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,11 +8,21 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 40f;
     private bool isFacingRight = true;
     private IInteractable interactableObject;
+    private GameObject interactItem;
     public Animator animator;
+    private Inventory saveItem;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private GameObject door;
+    [SerializeField] private int totalItems;
+
+    void Start()
+    {
+        saveItem = GetComponent<Inventory>();
+        door.SetActive(false);
+    }
 
     void Update()
     {
@@ -41,9 +51,16 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && interactableObject != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            interactableObject.Interact();
+            if (interactableObject != null)
+            {
+                interactableObject.Interact();
+            }
+            else if (interactItem != null)
+            {
+                CollectItem(interactItem);
+            }
         }
 
         Flip();
@@ -76,6 +93,10 @@ public class PlayerMovement : MonoBehaviour
         {
             interactableObject = interactable;
         }
+        else if (other.CompareTag("Item"))
+        {
+            interactItem = other.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -83,6 +104,28 @@ public class PlayerMovement : MonoBehaviour
         if (other.TryGetComponent<IInteractable>(out var interactable) && interactableObject == interactable)
         {
             interactableObject = null;
+        }
+        else if (other.CompareTag("Item") && interactItem == other.gameObject)
+        {
+            interactItem = null;
+        }
+    }
+
+    private void CollectItem(GameObject item)
+    {
+        if (saveItem != null && saveItem.collectedItems.Count < saveItem.maxItems)
+        {
+            saveItem.SetInteractableItem(item);
+            item.SetActive(false);
+            CheckedItems();
+        }
+    }
+
+    private void CheckedItems()
+    {
+        if (saveItem.collectedItems.Count >= totalItems)
+        {
+            door.SetActive(true);
         }
     }
 }
