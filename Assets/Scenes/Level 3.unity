@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 421294574}
   - component: {fileID: 421294573}
   - component: {fileID: 421294572}
-  - component: {fileID: 421294571}
+  - component: {fileID: 421294576}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -691,23 +691,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &421294571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421294570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7ce9d9165d55f48ba95378587ae75d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 421294573}
-  groundCheck: {fileID: 2065974804}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!61 &421294572
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -852,6 +835,23 @@ Transform:
   - {fileID: 2065974804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &421294576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421294570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b046ebee20bb2484097b82736a19e794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 421294573}
+  groundCheck: {fileID: 2065974804}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &437568655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,8 +1097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fc93e3d35702442b21c10a0d911240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.25
-  posOffset: {x: 0, y: 2, z: -10}
 --- !u!1 &532599014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,7 +1929,7 @@ GameObject:
   - component: {fileID: 1127333283}
   - component: {fileID: 1127333279}
   - component: {fileID: 1127333282}
-  - component: {fileID: 1127333281}
+  - component: {fileID: 1127333284}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Player
@@ -1982,23 +1980,6 @@ Transform:
   - {fileID: 1248321984}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127333281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127333278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7ce9d9165d55f48ba95378587ae75d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1127333279}
-  groundCheck: {fileID: 1248321984}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!61 &1127333282
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2100,6 +2081,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1127333284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127333278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b046ebee20bb2484097b82736a19e794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 421294573}
+  groundCheck: {fileID: 2065974804}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1166706498
 GameObject:
   m_ObjectHideFlags: 0

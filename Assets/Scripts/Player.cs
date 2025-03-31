@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private float horizontal;
     private float speed = 16f;
