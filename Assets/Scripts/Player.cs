@@ -7,10 +7,15 @@ public class Player : MonoBehaviour
     private float speed = 16f;
     private float jumpingPower = 40f;
     private bool isFacingRight = true;
+    private bool isWalking;
+    private bool wasGrounded;
     private IInteractable interactableObject;
     private GameObject interactItem;
     public Animator animator;
     private Inventory saveItem;
+
+    AudioManager sfx;
+    AudioSource walksfx;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -18,9 +23,14 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private int totalItems;
 
+    private void Awake()
+    {
+        sfx = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Start()
     {
         saveItem = GetComponent<Inventory>();
+        walksfx = GetComponent<AudioSource>();
         door.SetActive(false);
     }
 
@@ -33,6 +43,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            sfx.PlaySFX(sfx.jump);
             animator.SetBool("isJump", true);
         }
 
@@ -55,15 +66,45 @@ public class Player : MonoBehaviour
         {
             if (interactableObject != null)
             {
+                sfx.PlaySFX(sfx.portal);
                 interactableObject.Interact();
             }
             else if (interactItem != null)
             {
+                sfx.PlaySFX(sfx.pick);
                 CollectItem(interactItem);
             }
         }
 
+        HandleWalkingSFX();
+        HandleLandingSFX();
         Flip();
+    }
+
+    private void HandleWalkingSFX()
+    {
+        if (IsGrounded() && Mathf.Abs(horizontal) > 0)
+        {
+            if (!isWalking && !walksfx.isPlaying)
+            {
+                walksfx.Play();
+                isWalking = true;
+            }
+        }
+        else
+        {
+            walksfx.Stop();
+            isWalking = false;
+        }
+    }
+
+    private void HandleLandingSFX()
+    {
+        if (!wasGrounded && IsGrounded())
+        {
+            sfx.PlaySFX(sfx.landing);
+        }
+        wasGrounded = IsGrounded();
     }
 
     private void FixedUpdate()
@@ -86,6 +127,7 @@ public class Player : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
