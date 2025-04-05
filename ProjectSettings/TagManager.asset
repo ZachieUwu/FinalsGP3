@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Item
   - Audio
+  - SecretItem
+  - Exit
+  - Wall
   layers:
   - Default
   - TransparentFX

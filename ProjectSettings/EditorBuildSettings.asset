@@ -6,23 +6,41 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: c0b57c340043ff842aa39e7f4b1b1a15
+  - enabled: 1
     path: Assets/Scenes/Cutscene 1 Alex Bedroom.unity
     guid: 2907e249da9413a45abd81f8f8e4056b
   - enabled: 1
     path: Assets/Scenes/Scenario 1 - Alex.unity
     guid: c4cb23125db083442b336efee50967da
+  - enabled: 0
+    path: Assets/Scenes/Cutscene 1 Sam Bedroom.unity
+    guid: dadb922b0132ef14b9ef19c61341a217
   - enabled: 1
     path: Assets/Scenes/Scenario 1- Sam.unity
     guid: 9f8720b6aee7aeb4097b14c683e9e047
   - enabled: 1
+    path: Assets/Scenes/Normal Cutscene 1.unity
+    guid: 83a9ae156d16b7e4b9aa9eeee6ffaedf
+  - enabled: 1
+    path: Assets/Scenes/Secret Cutscene 1.unity
+    guid: d7b238b885ce8f847b539cf2e20763de
+  - enabled: 1
     path: Assets/Scenes/Scenario 2 - Alex.unity
-    guid: 8d0c678e139c8ad4dbd2f6ca9d6ba989
+    guid: cd3c82b2c45fb664e9b69e3e53385ba1
   - enabled: 1
     path: Assets/Scenes/Scenario 2 - Sam.unity
-    guid: 253288f1bcb506547bd82675ab9ad671
+    guid: d184cc7585e2a854a83cdf5ccdf81088
+  - enabled: 1
+    path: Assets/Scenes/Normal Cutscene 2.unity
+    guid: 1cf3106dbd05edc4fb809f3945a71ae9
+  - enabled: 1
+    path: Assets/Scenes/Secret Cutscene 2.unity
+    guid: 993bb9a4168741f4abe5989aa3a8e684
   - enabled: 1
     path: Assets/Scenes/Scenario 3 - Alex.unity
-    guid: da846be4345ea40448804c8caa94bb83
+    guid: dc71c99dd66986046b24d23586384b4e
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729

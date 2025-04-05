@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class SecondPlayer : MonoBehaviour
 {
-    public bool canMove = true;
-
     public float horizontal;
     public float speed = 16f;
     public float jumpingPower = 40f;
@@ -14,7 +11,6 @@ public class Player : MonoBehaviour
     private IInteractable interactableObject;
     private GameObject interactItem;
     public Animator animator;
-    private Inventory saveItem;
 
     AudioManager sfx;
     AudioSource walksfx;
@@ -24,10 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] public LayerMask groundLayer;
     [SerializeField] public GameObject door;
     [SerializeField] private int totalItems;
-    [SerializeField] private int totalSecretItems; // Secret items count
-    private bool hasEnoughItems = false;
-    [SerializeField] public bool isSecondCharacter = false;
-
+    [SerializeField] private int totalSecretItems;
 
     private Inventory normalInventory;
     private SItemMatch secretInventory;
@@ -47,15 +40,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
-        {
-            PlayerControl();
-        }
+        PlayerControl();
     }
 
     public void PlayerControl()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        // Invert the horizontal movement for the second character
+        horizontal = -Input.GetAxisRaw("Horizontal");
 
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
@@ -100,11 +91,6 @@ public class Player : MonoBehaviour
         Flip();
     }
 
-    public void CanMove(bool value)
-    {
-        canMove = value;
-    }
-
     private void HandleWalkingSFX()
     {
         if (IsGrounded() && Mathf.Abs(horizontal) > 0)
@@ -131,11 +117,11 @@ public class Player : MonoBehaviour
         wasGrounded = IsGrounded();
     }
 
-
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
     }
+
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
@@ -177,7 +163,7 @@ public class Player : MonoBehaviour
                 secretInventory.AddSecretItem(item);
                 if (GameManager.Instance != null)
                 {
-                    GameManager.Instance.SetSecretItemCollected(isSecondCharacter);
+                    GameManager.Instance.SetSecretItemCollected(true); // Assuming true for second character
                 }
                 else
                 {
@@ -197,11 +183,9 @@ public class Player : MonoBehaviour
 
     private void CheckedItems()
     {
-        if (!hasEnoughItems && normalInventory.collectedItems.Count == totalItems)
+        if (normalInventory.collectedItems.Count == totalItems)
         {
-            hasEnoughItems = true;
             door.SetActive(true); // Show door when all normal items are collected
         }
     }
-
 }
