@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -11,10 +12,9 @@ public class Player : MonoBehaviour
     private bool isFacingRight = true;
     private bool isWalking;
     private bool wasGrounded;
+
     private IInteractable interactableObject;
     private GameObject interactItem;
-    public Animator animator;
-    private Inventory saveItem;
 
     AudioManager sfx;
     AudioSource walksfx;
@@ -25,10 +25,12 @@ public class Player : MonoBehaviour
     [SerializeField] public GameObject door;
     [SerializeField] private int totalItems;
     [SerializeField] private int totalSecretItems; // Secret items count
-    private bool hasEnoughItems = false;
     [SerializeField] public bool isSecondCharacter = false;
+    [SerializeField] private bool hasEnoughItems = false;
 
-
+    public Animator animator;
+    //public PlayableDirector timeline;
+    private Inventory saveItem;
     private Inventory normalInventory;
     private SItemMatch secretInventory;
 
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
             else if (interactItem != null)
             {
                 sfx.PlaySFX(sfx.pick);
+                //timeline?.Play();
                 CollectItem(interactItem, interactItem.CompareTag("SecretItem"));
             }
         }
